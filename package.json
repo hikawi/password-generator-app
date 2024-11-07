@@ -10,11 +10,11 @@
     "astro": "astro"
   },
   "dependencies": {
-    "@astrojs/check": "^0.9.3",
-    "@astrojs/svelte": "^5.7.0",
-    "@astrojs/tailwind": "^5.1.0",
-    "@astrojs/vercel": "^7.8.1",
-    "astro": "^4.15.6",
+    "@astrojs/check": "^0.9.4",
+    "@astrojs/svelte": "^5.7.3",
+    "@astrojs/tailwind": "^5.1.2",
+    "@astrojs/vercel": "^7.8.2",
+    "astro": "^4.16.10",
     "prettier": "^3.3.3",
     "prettier-plugin-astro": "^0.14.1",
     "prettier-plugin-svelte": "^3.2.6",
@@ -23,5 +23,14 @@
     "svelte": "^4.2.19",
     "tailwindcss": "^3.4.11",
     "typescript": "^5.6.2"
+  },
+  "devDependencies": {
+    "@sveltejs/vite-plugin-svelte": "^4.0.0",
+    "@testing-library/jest-dom": "^6.6.3",
+    "@testing-library/svelte": "^5.2.4",
+    "@vitest/browser": "^2.1.4",
+    "@vitest/coverage-istanbul": "^2.1.4",
+    "playwright": "^1.48.2",
+    "vitest": "^2.1.4"
   }
 }

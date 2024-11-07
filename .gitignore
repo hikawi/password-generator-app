@@ -6,6 +6,7 @@ dist/
 # dependencies
 node_modules/
 design/
+test-results/
 
 # logs
 npm-debug.log*

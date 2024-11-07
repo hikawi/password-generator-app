@@ -11,7 +11,11 @@
           : "bg-style-red border-style-red";
 </script>
 
-<div class="flex flex-row h-full gap-2 items-center justify-center">
+<div
+  class="flex flex-row h-full gap-2 items-center justify-center"
+  aria-hidden="true"
+  data-testid="bars"
+>
   {#each Array(4) as _, i}
     {#if i + 1 <= strength}
       <div class="w-[0.625rem] h-7 border-2 {colors}"></div>
