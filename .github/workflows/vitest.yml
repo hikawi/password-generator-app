@@ -5,26 +5,21 @@ jobs:
     name: Test
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-      - name: Setup node
+      - uses: actions/checkout@v4
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Set node version to latest
         uses: actions/setup-node@v4
         with:
           node-version: latest
+
       - name: Install
-        run: npm install --legacy-peer-deps
+        run: pnpm i
+
+      - name: Install Playwright Dependencies
+        run: pnpm exec playwright install chromium --with-deps
+
       - name: Test
-        run: npx vitest run --coverage
-        env:
-          CI: true
-      - name: Send coverage
-        uses: codecov/codecov-action@v4
-        with:
-          token: ${{ secrets.CODECOV_TOKEN }}
-          files: ./test-results/coverage-final.json
-      - name: Upload test results to Codecov
-        if: ${{ !cancelled() }}
-        uses: codecov/test-results-action@v1
-        with:
-          token: ${{ secrets.CODECOV_TOKEN }}
-          files: ./test-results/tests.xml
+        run: pnpm vitest run --coverage
