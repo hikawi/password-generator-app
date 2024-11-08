@@ -11,6 +11,9 @@ export default getViteConfig({
       conditions: ['browser']
     }
     : undefined,
+  optimizeDeps: {
+    include: ["@vitest/coverage-istanbul", "svelte/internal/client", "svelte/internal/flags/legacy"],
+  },
   test: {
     css: true,
     setupFiles: ["./tests/vitest-setup.ts"],
@@ -20,7 +23,8 @@ export default getViteConfig({
       reportOnFailure: process.env.CI == "true",
       reportsDirectory: "./test-results",
       reporter: process.env.CI ? ["text", "json"] : ["text-summary", "text", "html-spa"],
-      exclude: [...coverageConfigDefaults.exclude, "./src/pages/**/*", "./src/assets/**/*"],
+      exclude: [...coverageConfigDefaults.exclude, "**/*.astro"],
+      include: ["**"],
     },
     browser: {
       provider: "playwright",

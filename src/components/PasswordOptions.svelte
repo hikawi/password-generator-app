@@ -1,8 +1,17 @@
 <script lang="ts">
-  export let allowUppercase = false;
-  export let allowLowercase = false;
-  export let allowNumbers = false;
-  export let allowSymbols = false;
+  interface Props {
+    allowUppercase: boolean;
+    allowLowercase: boolean;
+    allowNumbers: boolean;
+    allowSymbols: boolean;
+  }
+
+  let {
+    allowUppercase = $bindable(),
+    allowLowercase = $bindable(),
+    allowNumbers = $bindable(),
+    allowSymbols = $bindable(),
+  }: Props = $props();
 </script>
 
 <div class="flex flex-col w-full items-start justify-center gap-4 text-left">
@@ -30,7 +39,7 @@
   }
 
   input[type="checkbox"] {
-    @apply border-style-white bg-style-very-dark-gray hover:border-style-green checked:bg-style-green checked:border-style-green relative size-5 appearance-none border-2 border-solid hover:cursor-pointer;
+    @apply relative size-5 appearance-none border-2 border-solid border-style-white bg-style-very-dark-gray checked:border-style-green checked:bg-style-green hover:cursor-pointer hover:border-style-green;
 
     &:checked::after {
       @apply block;

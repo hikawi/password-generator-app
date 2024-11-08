@@ -1,9 +1,13 @@
 <script lang="ts">
   import IconCopy from "./icons/IconCopy.svelte";
 
-  export let password: string;
-  let passwordCopied: boolean = false; // To show a message when the password is copied, disappears after 3 seconds
-  let copyMessage: string;
+  interface Props {
+    password: string;
+  }
+
+  let { password }: Props = $props();
+  let passwordCopied = $state(false); // To show a message when the password is copied, disappears after 3 seconds
+  let copyMessage = $state("Copied");
 
   function copyPassword() {
     navigator.clipboard.writeText(password);
@@ -22,12 +26,18 @@
 >
   <!-- If the password is not empty, show the password, otherwise show a placeholder -->
   {#if password !== ""}
-    <span class="text-2xl sm:text-[2rem] overflow-x-scroll">{password}</span>
+    <span
+      class="text-2xl sm:text-[2rem] overflow-x-scroll"
+      data-testid="password"
+    >
+      {password}
+    </span>
   {:else}
     <span
-      class="text-2xl sm:text-[2rem] overflow-x-scroll text-style-white opacity-25"
-      >P4$5W0rD!</span
+      class="text-2xl sm:text-[2rem] overflow-x-scroll text-style-white opacity-25 select-none"
     >
+      P4$5W0rD!
+    </span>
   {/if}
 
   <div class="flex flex-row gap-4">
@@ -37,7 +47,7 @@
     >
       {copyMessage}
     </span>
-    <button class="outline-none" on:click={copyPassword}>
+    <button class="outline-none" onclick={copyPassword}>
       <IconCopy />
     </button>
   </div>

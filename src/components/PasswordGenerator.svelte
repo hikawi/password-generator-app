@@ -5,29 +5,54 @@
   import PasswordOptions from "./PasswordOptions.svelte";
   import PasswordStrength from "./PasswordStrength.svelte";
 
-  let password = "";
+  let password = $state("");
 
-  let length = 10;
-  let allowUppercase = true;
-  let allowLowercase = true;
-  let allowNumbers = true;
-  let allowSymbols = false;
+  let length = $state(10);
+  let allowUppercase = $state(true);
+  let allowLowercase = $state(true);
+  let allowNumbers = $state(true);
+  let allowSymbols = $state(false);
 
   function generatePassword() {
-    let charset = "";
-    if (allowUppercase) charset += "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    if (allowLowercase) charset += "abcdefghijklmnopqrstuvwxyz";
-    if (allowNumbers) charset += "0123456789";
-    if (allowSymbols) charset += "!@#$%^&*()_+-=[]{};':|,.<>?";
+    const uppercaseChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    const lowercaseChars = "abcdefghijklmnopqrstuvwxyz";
+    const numberChars = "0123456789";
+    const symbolChars = "!@#$%^&*()_+[]{}|;:,.<>?";
 
-    let generatedPassword = "";
-    for (let i = 0; i < length; i++) {
-      generatedPassword += charset.charAt(
-        Math.floor(Math.random() * charset.length),
-      );
+    // Create an array of character sets based on allowed types
+    const charSets = [];
+    if (allowUppercase) charSets.push(uppercaseChars);
+    if (allowLowercase) charSets.push(lowercaseChars);
+    if (allowNumbers) charSets.push(numberChars);
+    if (allowSymbols) charSets.push(symbolChars);
+
+    if (charSets.length === 0) {
+      return "";
     }
 
-    password = generatedPassword;
+    let pw = "";
+    let usedSets = 0;
+
+    // Add at least one character from each allowed character set, up to the length limit
+    for (let i = 0; i < Math.min(length, charSets.length); i++) {
+      const charSet = charSets[i];
+      const randomIndex = Math.floor(Math.random() * charSet.length);
+      pw += charSet[randomIndex];
+      usedSets++;
+    }
+
+    // Fill the remaining length with random characters from all allowed character sets
+    const combinedPool = charSets.join("");
+    for (let i = usedSets; i < length; i++) {
+      const randomIndex = Math.floor(Math.random() * combinedPool.length);
+      pw += combinedPool[randomIndex];
+    }
+
+    // Shuffle the password to distribute the initial characters randomly
+    password = pw
+      .split("")
+      .sort(() => 0.5 - Math.random())
+      .join("");
   }
 </script>
 

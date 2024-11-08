@@ -25,3 +25,17 @@ jobs:
 
       - name: Test
         run: pnpm vitest run --coverage
+        env:
+          CI: true
+
+      - name: Upload codecov
+        uses: codecov/codecov-action@v4
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          files: ./test-results/coverage-final.json
+
+      - name: Upload test results
+        uses: codecov/test-results-action@v1
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          files: ./test-results/tests.xml

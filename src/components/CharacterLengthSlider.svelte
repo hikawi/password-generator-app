@@ -1,7 +1,11 @@
 <script lang="ts">
   import { onMount } from "svelte";
 
-  export let value: number;
+  interface Props {
+    value: number;
+  }
+
+  let { value = $bindable() }: Props = $props();
 
   function changeValueProperty(event: Event) {
     const target = event.target as HTMLInputElement;
@@ -28,7 +32,7 @@
     min={0}
     max={20}
     id="char-length"
-    on:input={changeValueProperty}
+    oninput={changeValueProperty}
   />
 </div>
 
@@ -46,7 +50,7 @@
     &::-webkit-slider-thumb {
       -webkit-appearance: none;
       margin-top: -0.625rem; // Shift the thumb up, or it stays below the track. This value is (trackheight / 2) - (thumbheight / 2) = (0.5 / 2 - 1.75 / 2)
-      @apply bg-style-white border-style-white hover:border-style-green hover:bg-style-very-dark-gray size-7 cursor-pointer rounded-full border-2 border-solid;
+      @apply size-7 cursor-pointer rounded-full border-2 border-solid border-style-white bg-style-white hover:border-style-green hover:bg-style-very-dark-gray;
     }
     &::-webkit-slider-runnable-track {
       background: linear-gradient(
@@ -64,15 +68,15 @@
     //
     // The thumb
     &::-ms-thumb {
-      @apply bg-style-white border-style-white hover:border-style-green hover:bg-style-very-dark-gray size-7 cursor-pointer rounded-full border-2;
+      @apply size-7 cursor-pointer rounded-full border-2 border-style-white bg-style-white hover:border-style-green hover:bg-style-very-dark-gray;
     }
     // The track
     &::-ms-track {
-      @apply bg-style-very-dark-gray h-2;
+      @apply h-2 bg-style-very-dark-gray;
     }
     // The progress bar
     &::-ms-fill-lower {
-      @apply bg-style-green h-2;
+      @apply h-2 bg-style-green;
     }
 
     //
@@ -82,19 +86,19 @@
     &::-moz-range-thumb {
       -moz-appearance: none; // Clear the default gray border on the thumb.
       appearance: none;
-      @apply bg-style-white border-style-white hover:border-style-green hover:bg-style-very-dark-gray size-7 cursor-pointer rounded-full border-2;
+      @apply size-7 cursor-pointer rounded-full border-2 border-style-white bg-style-white hover:border-style-green hover:bg-style-very-dark-gray;
     }
     // The track
     &::-moz-range-track {
       -moz-appearance: none; // Idk what this clears, but just in case.
       appearance: none;
-      @apply bg-style-very-dark-gray h-2;
+      @apply h-2 bg-style-very-dark-gray;
     }
     // The progress bar
     &::-moz-range-progress {
       -moz-appearance: none; // Idk what this clears, but just in case.
       appearance: none;
-      @apply bg-style-green h-2;
+      @apply h-2 bg-style-green;
     }
   }
 </style>
