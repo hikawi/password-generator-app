@@ -2,6 +2,15 @@
 
 This is a solution to the [Password generator app challenge on Frontend Mentor](https://www.frontendmentor.io/challenges/password-generator-app-Mr8CLycqjh). Frontend Mentor challenges help you improve your coding skills by building realistic projects.
 
+<div align="center">
+
+![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/hikawi/password-generator-app/vitest.yml)
+![Codecov](https://img.shields.io/codecov/c/github/hikawi/password-generator-app)
+![Code Climate maintainability](https://img.shields.io/codeclimate/maintainability/hikawi/password-generator-app)
+![Code Climate technical debt](https://img.shields.io/codeclimate/issues/hikawi/password-generator-app)
+
+</div>
+
 ## Table of contents
 
 - [Frontend Mentor - Password generator app solution](#frontend-mentor---password-generator-app-solution)
@@ -98,10 +107,12 @@ Other than that, everything was fine and dandy, and got working very fast. Was n
 
 ### Built with
 
-- [Svelte](https://svelte.dev/)
+- [Svelte 5](https://svelte.dev/)
 - [Tailwind CSS](https://tailwindcss.com/)
 - [Astro](https://astro.build/)
-- [SCSS](https://sass-lang.com/)
+- [Scss/Sass](https://sass-lang.com/)
+- [Vitest](https://vitest.dev/)
+- [Playwright](https://playwright.dev/)
 
 ### Useful resources
 

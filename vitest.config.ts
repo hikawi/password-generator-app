@@ -22,7 +22,7 @@ export default getViteConfig({
       provider: "istanbul",
       reportOnFailure: process.env.CI == "true",
       reportsDirectory: "./test-results",
-      reporter: process.env.CI ? ["text", "json"] : ["text-summary", "text", "html-spa"],
+      reporter: process.env.CI ? ["text", "json", "lcovonly"] : ["text-summary", "text", "html-spa"],
       exclude: [...coverageConfigDefaults.exclude, "**/*.astro"],
       include: ["**"],
     },
