@@ -1,38 +1,27 @@
-name: Playwright Tests
-on:
-  push:
-    branches: [main, master]
-  pull_request:
-    branches: [main, master]
+name: Vitest
+on: [push, pull_request]
 jobs:
   test:
-    name: Run tests and collect coverage
-    runs-on: ubuntu-latest
+    name: Test
+    runs-on: ubuntu@latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-
-      - name: Set up Node
+      - name: Setup node
         uses: actions/setup-node@v4
         with:
           node-version: latest
-
-      - name: Install dependencies
+      - name: Install
         run: npm install --legacy-peer-deps
-
-      - name: Run tests
+      - name: Test
         run: npx vitest run --coverage
         env:
           CI: true
-
-      - name: Upload results to Codecov
+      - name: Send coverage
         uses: codecov/codecov-action@v4
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           files: ./test-results/coverage-final.json
-
       - name: Upload test results to Codecov
         if: ${{ !cancelled() }}
         uses: codecov/test-results-action@v1

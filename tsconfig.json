@@ -4,6 +4,7 @@
     "types": [
       "@testing-library/jest-dom",
       "@vitest/browser/providers/playwright",
+      "@testing-library/svelte/svelte5"
     ]
   }
 }

@@ -1,14 +1,18 @@
 <script lang="ts">
-  export let strength: number;
+  interface Props {
+    strength: number;
+  }
 
-  $: colors =
-    strength >= 4
-      ? "bg-style-green border-style-green"
-      : strength == 3
-        ? "bg-style-yellow border-style-yellow"
-        : strength == 2
-          ? "bg-style-orange border-style-orange"
-          : "bg-style-red border-style-red";
+  const { strength }: Props = $props();
+  const colors = $derived(
+    strength <= 1
+      ? "bg-style-red border-style-red"
+      : strength === 2
+        ? "bg-style-orange border-style-orange"
+        : strength === 3
+          ? "bg-style-yellow border-style-yellow"
+          : "bg-style-green border-style-green",
+  );
 </script>
 
 <div
@@ -18,10 +22,14 @@
 >
   {#each Array(4) as _, i}
     {#if i + 1 <= strength}
-      <div class="w-[0.625rem] h-7 border-2 {colors}"></div>
+      <div
+        class="w-[0.625rem] h-7 border-2 {colors}"
+        data-testid="filled"
+      ></div>
     {:else}
       <div
         class="w-[0.625rem] h-7 border-2 border-style-white bg-style-very-dark-gray"
+        data-testid="empty"
       ></div>
     {/if}
   {/each}
